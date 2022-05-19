@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"psideris/message"
-	"psideris/personService"
+	"psideris/sandbox/message"
+	"psideris/sandbox/personService"
 )
 
 func init() {
-	log.Println("Runing init")
+	log.Println("Running init")
 	log.SetOutput(os.Stdout)
 }
 
@@ -17,12 +17,14 @@ func main() {
 	var msg = message.GetMessage("from main")
 	fmt.Println(msg)
 
-	p1 := personService.Create("John", 34)
-	personService.Update(&p1, "Doe", 34)
+	p1 := personService.NewPerson("John", "Doe", 34)
+	p1.Update("Johnny", "Doe", 30)
 
-	p2 := personService.Create("Marry", 30)
-	p2 = personService.GetUpdated(p2, "Poppins", 40)
+	p2 := personService.NewPerson("Marry", "Poppins", 20)
+	p2.UpdateAge(29)
 
-	personService.Print(p1)
-	personService.Print(p2)
+	p1.Print()
+	p2.Print()
+
+	// personService.PrintBooking()
 }
